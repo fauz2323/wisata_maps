@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:tha_maps/data/model/detail_wisata_model.dart';
+import 'package:tha_maps/helper/distance_helper.dart';
 import 'package:tha_maps/helper/size_helper.dart';
 import 'package:tha_maps/presentation/view/detail_wisata/cubit/detail_wisata_cubit.dart';
 import 'package:tha_maps/presentation/widget/loading_widget.dart';
@@ -48,7 +50,7 @@ class DetailWisataView extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             orElse: () => const Placeholder(),
-            loaded: (data) => _loaded(context, data),
+            loaded: (data, position) => _loaded(context, data, position),
             loading: () => LoadingWidget(),
             error: (message) => ErrorWidget(message),
           );
@@ -57,7 +59,8 @@ class DetailWisataView extends StatelessWidget {
     );
   }
 
-  Widget _loaded(BuildContext context, DetailWisataModel state) {
+  Widget _loaded(
+      BuildContext context, DetailWisataModel state, Position position) {
     openMapsSheet(context) async {
       try {
         final coords = Coords(double.parse(state.detail.latitude),
@@ -132,6 +135,13 @@ class DetailWisataView extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text("Cari Penginapan"),
+                      ),
+                    ),
                     Text("Detail: "),
                     SizedBox(
                       height: 10,
@@ -143,6 +153,16 @@ class DetailWisataView extends StatelessWidget {
                       child: Divider(),
                     ),
                     Text("Nomor Pengelola : " + state.detail.info.phone),
+                    Text("Distance : " +
+                        DistanceHelper()
+                            .getDistance(
+                              double.parse(state.detail.latitude),
+                              double.parse(state.detail.longitude),
+                              position.latitude,
+                              position.longitude,
+                            )
+                            .toStringAsFixed(2) +
+                        " KM"),
                   ],
                 ),
               ),

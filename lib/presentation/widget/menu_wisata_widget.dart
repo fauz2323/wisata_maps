@@ -11,10 +11,12 @@ class MenuWisataWidget extends StatelessWidget {
     required this.tittle,
     required this.onTap,
     required this.url,
+    required this.distance,
   });
   final String tittle;
   final VoidCallback onTap;
   final String url;
+  final String distance;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,10 @@ class MenuWisataWidget extends StatelessWidget {
                 tittle,
                 style: TextStyleTheme.appbarText,
               ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text("Distance : " + distance + " Km"),
             )
           ],
         ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:tha_maps/data/model/wisata_argument_model.dart';
 import 'package:tha_maps/data/model/wisata_model.dart';
+import 'package:tha_maps/helper/distance_helper.dart';
 import 'package:tha_maps/presentation/view/list_wisata/cubit/list_wisata_cubit.dart';
 import 'package:tha_maps/presentation/widget/menu_wisata_widget.dart';
 
@@ -45,14 +47,15 @@ class ListWisataView extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => Container(),
             loading: () => LoadingWidget(),
-            loaded: (data) => _page(context, data),
+            loaded: (data, position) => _page(context, data, position),
           );
         },
       ),
     );
   }
 
-  Widget _page(BuildContext context, WisataModel wisataModel) {
+  Widget _page(
+      BuildContext context, WisataModel wisataModel, Position position) {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(20),
@@ -66,6 +69,14 @@ class ListWisataView extends StatelessWidget {
                     },
                     tittle: e.nama,
                     url: "https://zeen.my.id/storage/image/" + e.image.image,
+                    distance: DistanceHelper()
+                        .getDistance(
+                          position.latitude,
+                          position.longitude,
+                          double.parse(e.latitude),
+                          double.parse(e.longitude),
+                        )
+                        .toStringAsFixed(2),
                   ),
                 )
                 .toList()),

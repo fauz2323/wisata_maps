@@ -20,7 +20,8 @@ mixin _$ListWisataState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) =>
@@ -29,7 +30,7 @@ mixin _$ListWisataState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) =>
@@ -38,7 +39,7 @@ mixin _$ListWisataState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),
@@ -132,7 +133,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) {
@@ -144,7 +146,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) {
@@ -156,7 +158,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),
@@ -252,7 +254,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) {
@@ -264,7 +267,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) {
@@ -276,7 +279,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),
@@ -338,7 +341,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({WisataModel wisataModel});
+  $Res call({WisataModel wisataModel, Position position});
 }
 
 /// @nodoc
@@ -353,12 +356,17 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? wisataModel = null,
+    Object? position = null,
   }) {
     return _then(_$LoadedImpl(
       null == wisataModel
           ? _value.wisataModel
           : wisataModel // ignore: cast_nullable_to_non_nullable
               as WisataModel,
+      null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Position,
     ));
   }
 }
@@ -366,14 +374,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.wisataModel);
+  const _$LoadedImpl(this.wisataModel, this.position);
 
   @override
   final WisataModel wisataModel;
+  @override
+  final Position position;
 
   @override
   String toString() {
-    return 'ListWisataState.loaded(wisataModel: $wisataModel)';
+    return 'ListWisataState.loaded(wisataModel: $wisataModel, position: $position)';
   }
 
   @override
@@ -382,11 +392,13 @@ class _$LoadedImpl implements _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             (identical(other.wisataModel, wisataModel) ||
-                other.wisataModel == wisataModel));
+                other.wisataModel == wisataModel) &&
+            (identical(other.position, position) ||
+                other.position == position));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, wisataModel);
+  int get hashCode => Object.hash(runtimeType, wisataModel, position);
 
   @JsonKey(ignore: true)
   @override
@@ -399,11 +411,12 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) {
-    return loaded(wisataModel);
+    return loaded(wisataModel, position);
   }
 
   @override
@@ -411,11 +424,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) {
-    return loaded?.call(wisataModel);
+    return loaded?.call(wisataModel, position);
   }
 
   @override
@@ -423,13 +436,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(wisataModel);
+      return loaded(wisataModel, position);
     }
     return orElse();
   }
@@ -476,9 +489,11 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ListWisataState {
-  const factory _Loaded(final WisataModel wisataModel) = _$LoadedImpl;
+  const factory _Loaded(
+      final WisataModel wisataModel, final Position position) = _$LoadedImpl;
 
   WisataModel get wisataModel;
+  Position get position;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -550,7 +565,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) {
@@ -562,7 +578,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) {
@@ -574,7 +590,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),
@@ -675,7 +691,8 @@ class _$UnautorizeImpl implements _Unautorize {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WisataModel wisataModel) loaded,
+    required TResult Function(WisataModel wisataModel, Position position)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() unautorize,
   }) {
@@ -687,7 +704,7 @@ class _$UnautorizeImpl implements _Unautorize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(WisataModel wisataModel)? loaded,
+    TResult? Function(WisataModel wisataModel, Position position)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? unautorize,
   }) {
@@ -699,7 +716,7 @@ class _$UnautorizeImpl implements _Unautorize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WisataModel wisataModel)? loaded,
+    TResult Function(WisataModel wisataModel, Position position)? loaded,
     TResult Function(String message)? error,
     TResult Function()? unautorize,
     required TResult orElse(),

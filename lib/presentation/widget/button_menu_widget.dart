@@ -21,8 +21,8 @@ class ButtonMenu extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: SizeHelper.width(context) * 20 / 100,
-            height: SizeHelper.width(context) * 20 / 100,
+            width: SizeHelper.width(context) * 12 / 100,
+            height: SizeHelper.width(context) * 12 / 100,
             decoration: BoxDecoration(
               color: ColorTheme.secondary.withOpacity(0.4),
               borderRadius: BorderRadius.circular(20),

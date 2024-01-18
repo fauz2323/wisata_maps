@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:tha_maps/data/model/wisata_argument_model.dart';
 import 'package:tha_maps/data/model/wisata_model.dart';
+import 'package:tha_maps/helper/distance_helper.dart';
 import 'package:tha_maps/presentation/view/home_screen/cubit/home_screen_cubit.dart';
 
 import '../../../helper/token_helper.dart';
@@ -58,14 +60,14 @@ class HomeScreenView extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => Container(),
             loading: () => LoadingWidget(),
-            loaded: (data) => _loaded(context, data),
+            loaded: (data, position) => _loaded(context, data, position),
           );
         },
       ),
     );
   }
 
-  Widget _loaded(BuildContext context, WisataModel data) {
+  Widget _loaded(BuildContext context, WisataModel data, Position position) {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(20),
@@ -101,6 +103,13 @@ class HomeScreenView extends StatelessWidget {
                           arguments: WisataArgumentModel(id: 'all'));
                     }),
                 ButtonMenu(
+                  path: 'assets/images/building.png',
+                  tittle: "Penginapan",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/maps');
+                  },
+                ),
+                ButtonMenu(
                     path: 'assets/images/options.png',
                     tittle: "Kategori",
                     onTap: () {
@@ -132,6 +141,13 @@ class HomeScreenView extends StatelessWidget {
                       onTap: () {},
                       tittle: e.nama,
                       url: "https://zeen.my.id/storage/image/" + e.image.image,
+                      distance: DistanceHelper()
+                          .getDistance(
+                              double.parse(e.latitude),
+                              double.parse(e.longitude),
+                              position.latitude,
+                              position.longitude)
+                          .toStringAsFixed(2),
                     ),
                   )
                   .toList()
